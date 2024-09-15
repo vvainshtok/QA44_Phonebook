@@ -17,4 +17,14 @@ public class RegistrationTests extends ApplicationManager {
                 .isElementContactPresent());
     }
 
+    @Test
+    public void registrationNegativeTest_wrongEmail() {
+
+        Assert.assertTrue(new HomePage(getDriver())
+                .clickBtnLoginHeader()
+                .typeLoginForm("invalidemail", "Password123_!")
+                .clickBtnRegistrationNegative()
+                .closeAlert()
+                .isTextInElementPresent_errorMessageRegistration());
+    }
 }
