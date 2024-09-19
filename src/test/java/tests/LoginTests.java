@@ -23,7 +23,7 @@ public class LoginTests extends ApplicationManager {
                 .typeLoginForm("qa_mail@mail.com", "Qwerty123!---")
                 .clickBtnLoginNegative()
                 .closeAlert()
-                .isTextInElementPresent_errorMessageLogin());
+                .isTextInElementPresent_errorMessage());
     }
 
     @Test
@@ -33,7 +33,7 @@ public class LoginTests extends ApplicationManager {
                 .typeLoginForm("qa_mail_wrong@mail.com", "Qwerty123!")
                 .clickBtnLoginNegative()
                 .closeAlert()
-                .isTextInElementPresent_errorMessageLogin());
+                .isTextInElementPresent_errorMessage());
     }
 
 }
