@@ -4,8 +4,10 @@ public enum HeaderMenuItem {
 
     HOME("//a[@href='/home']"),
     ABOUT("//a[@href='/about']"),
-    LOGIN("//a[@href='/login']");
-
+    LOGIN("//a[@href='/login']"),
+    CONTACTS("//a[@href='/contacts']"),
+    ADD("//a[@href='/add']"),
+    SIGN_OUT("//button[text()='Sign Out");
 
     private final String locator;
 

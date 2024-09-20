@@ -1,10 +1,16 @@
 package pages;
 
+import com.google.common.net.InetAddresses;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.*;
+
+import java.time.Duration;
 
 
 public class BasePage {
@@ -28,18 +34,35 @@ public class BasePage {
     }
 
     public static <T extends BasePage> T clickButtonsOnHeader(HeaderMenuItem headerMenuItem) {
-
-        WebElement element = driver.findElement(By.xpath(headerMenuItem.getLocator()));
+        try {
+            WebElement element = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.elementToBeClickable(By.xpath(headerMenuItem.getLocator())));
         element.click();
+        }catch (TimeoutException exception) {
+            System.out.println("created exception");
+        }
+
+        // WebElement element = driver.findElement(By.xpath(headerMenuItem.getLocator()));
+        // element.click();
         switch (headerMenuItem) {
-            case HOME:
+            case HOME -> {
                 return (T) new HomePage(driver);
-            case ABOUT:
+            }
+            case ABOUT -> {
                 return (T) new AboutPage(driver);
-            case LOGIN:
+            }
+            case LOGIN -> {
                 return (T) new LoginPage(driver);
-            default:
+            }
+            case ADD -> {
+                return (T) new AddPage(driver);
+            }
+            case CONTACTS -> {
+                return (T) new ContactPage(driver);
+            }
+            default -> {
                 throw new IllegalArgumentException("Invalid parameter headerMenuItem");
+            }
         }
     }
 }
