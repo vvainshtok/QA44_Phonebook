@@ -1,5 +1,8 @@
 package tests;
 
+import data_provider.DPLogin;
+import dto.UserDto;
+
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -34,6 +37,19 @@ public class LoginTests extends ApplicationManager {
                 .clickBtnLoginNegative()
                 .closeAlert()
                 .isTextInElementPresent_errorMessage());
+    }
+
+    // домашнее задание №8
+    @Test(dataProvider = "addUserFile", dataProviderClass = DPLogin.class)
+    public void loginNegativeTestDP(UserDto user) {
+        Assert.assertTrue(
+                new HomePage(getDriver())
+                .clickBtnLoginHeader()
+                .typeLoginForm(user)
+                .clickBtnLoginNegative()
+                .closeAlert()
+                .isTextInElementPresent_errorMessage())
+        ;
     }
 
 }

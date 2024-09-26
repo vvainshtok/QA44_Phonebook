@@ -4,7 +4,6 @@ import data_provider.DPAddContact;
 import dto.ContactDtoLombok;
 import dto.UserDto;
 import manager.ApplicationManager;
-import org.checkerframework.checker.units.qual.A;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -61,6 +60,7 @@ public class AddContactsTests extends ApplicationManager {
                 .contains("Email not valid"));
     }
 
+    // домашнее задание № 7
     @Test
     public void addNewContactNegativeTest_wrongPhoneNonDigits() {
         ContactDtoLombok contact = ContactDtoLombok.builder()
@@ -200,6 +200,14 @@ public class AddContactsTests extends ApplicationManager {
         Assert.assertTrue(addPage.fillContactForm(contact)
                 .clickBtnSaveContactPositive()
                 .isAlertPresent(5));
+    }
+
+    // домашнее задание №8
+    @Test(dataProvider = "addNewContactDPFile_EmptyFields", dataProviderClass = DPAddContact.class)
+    public void addNewContactNegativeTest_emptyFieldDP(ContactDtoLombok contact) {
+        Assert.assertTrue(addPage.fillContactForm(contact)
+                .clickBtnSaveContactNegative()
+                .isBtnSavePresent());
     }
 
 }
