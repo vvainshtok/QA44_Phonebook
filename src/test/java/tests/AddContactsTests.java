@@ -22,6 +22,7 @@ public class AddContactsTests extends ApplicationManager {
 
     @BeforeMethod
     public void login() {
+        logger.info("Start method --> login," + " user: " + user.getEmail());
         new HomePage(getDriver());
         LoginPage loginPage = clickButtonsOnHeader(HeaderMenuItem.LOGIN);
         loginPage.typeLoginForm(user).clickBtnLoginPositive();
