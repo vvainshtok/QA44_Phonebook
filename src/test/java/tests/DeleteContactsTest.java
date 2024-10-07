@@ -5,16 +5,20 @@ import dto.UserDto;
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.AddPage;
 import pages.ContactPage;
 import pages.HomePage;
 import pages.LoginPage;
 import utils.HeaderMenuItem;
+import utils.TestNGListener;
 
 import static pages.BasePage.clickButtonsOnHeader;
 import static utils.RandomUtils.*;
 import static utils.RandomUtils.generateString;
+
+@Listeners(TestNGListener.class)
 
 public class DeleteContactsTest extends ApplicationManager {
 
@@ -33,9 +37,9 @@ public class DeleteContactsTest extends ApplicationManager {
     public void DeleteLastContactPositiveTest() {
         ContactPage contactPage = clickButtonsOnHeader(HeaderMenuItem.CONTACTS);
         contactPage.pause(2);
-        int numberBefore = contactPage.numberOfContact();
-        contactPage.editlastInList().removeContact().pause(2);
-        int numberAfter = contactPage.numberOfContact();
+        int numberBefore = contactPage.getContactsNumber();
+        contactPage.editLastInList().removeContact().pause(2);
+        int numberAfter = contactPage.getContactsNumber();
         Assert.assertEquals(numberBefore-numberAfter, 1);
     }
 
@@ -51,13 +55,13 @@ public class DeleteContactsTest extends ApplicationManager {
                 .build();
         ContactPage contactPage = clickButtonsOnHeader(HeaderMenuItem.CONTACTS);
         contactPage.pause(2);
-        int numberBefore = contactPage.numberOfContact();
+        int numberBefore = contactPage.getContactsNumber();
         addPage = clickButtonsOnHeader(HeaderMenuItem.ADD);
         contactPage = addPage.fillContactForm(contact)
                 .clickBtnSaveContactPositive()
-                .editlastInList().removeContact();
+                .editLastInList().removeContact();
         addPage.pause(2);
-        int numberAfter = contactPage.numberOfContact();
+        int numberAfter = contactPage.getContactsNumber();
         Assert.assertEquals(numberBefore-numberAfter, 0);
 
     }

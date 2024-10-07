@@ -38,7 +38,6 @@ public class DPAddContact {
 
     @DataProvider
     public Iterator<ContactDtoLombok> addNewContactDPFile() {
-
         List<ContactDtoLombok> contactList = new ArrayList<>();
         BufferedReader bufferedReader;
         try {
@@ -64,11 +63,35 @@ public class DPAddContact {
 
     @DataProvider
     public Iterator<ContactDtoLombok> addNewContactDPFile_EmptyFields() {
-
         List<ContactDtoLombok> contactList = new ArrayList<>();
         BufferedReader bufferedReader;
         try {
             bufferedReader = new BufferedReader(new FileReader("src/test/resources/empty_field - Sheet1.csv"));
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                String[] splitArray = line.split(",");
+                contactList.add(ContactDtoLombok.builder()
+                        .name(splitArray[0])
+                        .lastName(splitArray[1])
+                        .phone(splitArray[2])
+                        .email(splitArray[3])
+                        .address(splitArray[4])
+                        .description(splitArray[5])
+                        .build());
+                line = bufferedReader.readLine();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return contactList.listIterator();
+    }
+
+    @DataProvider
+    public Iterator<ContactDtoLombok> editContactDPFile_wrongOrEmptyFields() {
+        List<ContactDtoLombok> contactList = new ArrayList<>();
+        BufferedReader bufferedReader;
+        try {
+            bufferedReader = new BufferedReader(new FileReader("src/test/resources/edit_contact_wrong_or_empty_fields.csv"));
             String line = bufferedReader.readLine();
             while (line != null) {
                 String[] splitArray = line.split(",");

@@ -4,19 +4,28 @@ import data_provider.DPLogin;
 import dto.UserDto;
 
 import manager.ApplicationManager;
+import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.HomePage;
+import utils.TestNGListener;
+
+import static utils.TakeScreenshot.takeScreenshot;
+
+@Listeners(TestNGListener.class)
 
 public class LoginTests extends ApplicationManager {
 
     @Test
     public void loginPositiveTest() {
-       Assert.assertTrue(new HomePage(getDriver())
+        boolean result = new HomePage(getDriver())
                 .clickBtnLoginHeader()
                 .typeLoginForm("qa_mail@mail.com", "Qwerty123!")
                 .clickBtnLoginPositive()
-                .isElementContactPresent());
+                .isElementContactPresent();
+        takeScreenshot((TakesScreenshot) getDriver());
+        Assert.assertTrue(result);
     }
 
     @Test
