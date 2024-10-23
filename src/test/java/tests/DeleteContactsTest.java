@@ -3,6 +3,10 @@ package tests;
 import dto.ContactDtoLombok;
 import dto.UserDto;
 import manager.ApplicationManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -13,6 +17,8 @@ import pages.HomePage;
 import pages.LoginPage;
 import utils.HeaderMenuItem;
 import utils.TestNGListener;
+
+import java.time.Duration;
 
 import static pages.BasePage.clickButtonsOnHeader;
 import static utils.RandomUtils.*;
@@ -35,8 +41,13 @@ public class DeleteContactsTest extends ApplicationManager {
     // домашнее задание №8
     @Test
     public void DeleteLastContactPositiveTest() {
+       // WebElement element = getDriver().findElement(By.xpath("//div[@class='contact-item_card__2SOIM']"));
+
         ContactPage contactPage = clickButtonsOnHeader(HeaderMenuItem.CONTACTS);
-        contactPage.pause(2);
+        contactPage.pause(10);
+        //new WebDriverWait(getDriver(), Duration.ofSeconds(4))
+        //        .until(ExpectedConditions.visibilityOf(element));
+
         int numberBefore = contactPage.getContactsNumber();
         contactPage.editLastInList().removeContact().pause(2);
         int numberAfter = contactPage.getContactsNumber();

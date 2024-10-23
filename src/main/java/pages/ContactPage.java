@@ -23,13 +23,11 @@ public class ContactPage extends BasePage{
 
     @FindBy(xpath = "//div[@class='contact-page_leftdiv__yhyke']//div[@class='contact-item_card__2SOIM'][last()]/h3")
     WebElement lastPhoneInList;
-
     @FindBy(xpath = "//div[@class='contact-page_leftdiv__yhyke']//div[@class='contact-item_card__2SOIM']/h3")
     WebElement firstPhoneInList;
 
     @FindBy(xpath = "//button[text()='Remove']")
     WebElement btnRemove;
-
     @FindBy(xpath = "//button[text()='Edit']")
     WebElement btnEdit;
 
@@ -51,6 +49,20 @@ public class ContactPage extends BasePage{
 
     @FindBy(xpath = "//div[@class='contact-item-detailed_card__50dTS']")
     WebElement contactCard;
+
+    //--------------------------------- на уроке 08.10.24
+    @FindBy(xpath = "//div[@class='contact-item-detailed_card__50dTS']/h2")
+    WebElement contactCardNameLastName;
+    @FindBy(xpath = "//div[@class='contact-item-detailed_card__50dTS']")
+    WebElement contactCardPhone;
+    @FindBy(xpath = "//div[@class='contact-item-detailed_card__50dTS']/br")
+    WebElement contactCardEmail;
+    @FindBy(xpath = "//div[@class='contact-item-detailed_card__50dTS']/br[last()]")
+    WebElement contactCardAddress;
+    @FindBy(xpath = "//div[@class='contact-item-detailed_card__50dTS']/h3")
+    WebElement contactCardDescription;
+    //---------------------------------
+
 
 
     public boolean isElementContactPresent() {

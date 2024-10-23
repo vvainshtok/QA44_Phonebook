@@ -20,7 +20,6 @@ public class AddPage extends BasePage{
                 new AjaxElementLocatorFactory(driver, 10), this);
     }
 
-
     @FindBy(xpath="//input[@placeholder='Name']")
     WebElement inputName;
     @FindBy(xpath="//input[@placeholder='Last Name']")
@@ -57,7 +56,6 @@ public class AddPage extends BasePage{
 
     public String closeAlert() {
         String res = "";
-        pause(3);
         Alert alert = new WebDriverWait(driver, Duration.ofSeconds(3))
                 .until(ExpectedConditions.alertIsPresent());
         res = alert.getText();

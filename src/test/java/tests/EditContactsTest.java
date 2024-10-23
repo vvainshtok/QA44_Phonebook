@@ -3,6 +3,9 @@ package tests;
 import data_provider.DPAddContact;
 import dto.ContactDtoLombok;
 import dto.UserDto;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Description;
+import io.qameta.allure.Owner;
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -13,17 +16,22 @@ import pages.ContactPage;
 import pages.HomePage;
 import pages.LoginPage;
 import utils.HeaderMenuItem;
+import utils.RetryAnalyzer;
 import utils.TestNGListener;
 
 import static pages.BasePage.clickButtonsOnHeader;
 import static utils.RandomUtils.*;
 import static utils.RandomUtils.generateString;
+import static utils.PropertiesReader.getProperty;
 
 @Listeners(TestNGListener.class)
 
 public class EditContactsTest extends ApplicationManager {
 
-    UserDto user = new UserDto("vv17@gmail.com","QWErty123!");
+    //UserDto user = new UserDto("vv17@gmail.com","QWErty123!");
+    UserDto user = new UserDto(getProperty("data.properties","email"),
+            getProperty("data.properties","password"));
+
     AddPage addPage;
 
     @BeforeMethod
@@ -33,7 +41,9 @@ public class EditContactsTest extends ApplicationManager {
         loginPage.typeLoginForm(user).clickBtnLoginPositive();
     }
 
-    @Test
+    @Description("positive test edit first contact all fields")
+    @Owner("Victor")
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void EditFirstContactPositiveTest_allFields() {
         ContactDtoLombok contact = ContactDtoLombok.builder()
                 .name(generateString(5))
@@ -44,6 +54,7 @@ public class EditContactsTest extends ApplicationManager {
                 .description(generateString(10))
                 .build();
         ContactPage contactPage = clickButtonsOnHeader(HeaderMenuItem.CONTACTS);
+        Allure.step("edit first contact");
         contactPage.editFirstInList();
         String cardBefore = contactPage.getContactCard();
         contactPage.clickBtnEditContact()

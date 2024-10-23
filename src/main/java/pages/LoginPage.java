@@ -65,9 +65,7 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-
     public LoginPage closeAlert() {
-        pause(3);
         Alert alert = new WebDriverWait(driver, Duration.ofSeconds(3))
                 .until(ExpectedConditions.alertIsPresent());
         System.out.println(alert.getText());
@@ -82,12 +80,6 @@ public class LoginPage extends BasePage {
     public boolean isTextInElementPresent_errorMessage(String text) {
         return isElementPresent(errorMessageLogin, text);
     }
-
-    /* public boolean isTextInElementPresent_errorMessageRegistration() {
-        return isElementPresent(errorMessageLogin, "Registration failed with code 400");
-    }
-    */
-
 }
 
 
