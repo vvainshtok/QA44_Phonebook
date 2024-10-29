@@ -18,9 +18,4 @@ public class ContactDtoLombok {
     private String phone;
     private String address;
     private String description;
-
-
-
-
-
 }

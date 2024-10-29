@@ -31,7 +31,7 @@ public class DeleteContactsTest extends ApplicationManager {
     UserDto user = new UserDto("vv17@gmail.com","QWErty123!");
     AddPage addPage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void login() {
         new HomePage(getDriver());
         LoginPage loginPage = clickButtonsOnHeader(HeaderMenuItem.LOGIN);
@@ -39,7 +39,7 @@ public class DeleteContactsTest extends ApplicationManager {
         }
 
     // домашнее задание №8
-    @Test
+    @Test(groups = {"smoke"})
     public void DeleteLastContactPositiveTest() {
        // WebElement element = getDriver().findElement(By.xpath("//div[@class='contact-item_card__2SOIM']"));
 

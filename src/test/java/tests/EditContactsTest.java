@@ -34,7 +34,7 @@ public class EditContactsTest extends ApplicationManager {
 
     AddPage addPage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void login() {
         new HomePage(getDriver());
         LoginPage loginPage = clickButtonsOnHeader(HeaderMenuItem.LOGIN);
@@ -43,7 +43,7 @@ public class EditContactsTest extends ApplicationManager {
 
     @Description("positive test edit first contact all fields")
     @Owner("Victor")
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class, groups = "smoke")
     public void EditFirstContactPositiveTest_allFields() {
         ContactDtoLombok contact = ContactDtoLombok.builder()
                 .name(generateString(5))

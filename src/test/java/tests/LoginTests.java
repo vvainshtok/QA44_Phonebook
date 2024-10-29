@@ -7,6 +7,8 @@ import manager.ApplicationManager;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import utils.TestNGListener;
@@ -17,8 +19,15 @@ import static utils.TakeScreenshot.takeScreenshot;
 
 public class LoginTests extends ApplicationManager {
 
-    @Test
-    public void loginPositiveTest() {
+    @Test(groups = {"parameters_tests", "smoke"})
+    @Parameters({"value1", "value2"})
+    public void parameterTest(int a, int b) {
+        int res = a + b;
+        Assert.assertTrue(res > 0);
+    }
+
+    @Test(groups = {"smoke"})
+      public void loginPositiveTest(@Optional String str) {
         boolean result = new HomePage(getDriver())
                 .clickBtnLoginHeader()
                 .typeLoginForm("qa_mail@mail.com", "Qwerty123!")

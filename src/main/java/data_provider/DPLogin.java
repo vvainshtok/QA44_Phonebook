@@ -23,7 +23,7 @@ public class DPLogin {
             while (line != null) {
                 String[] splitArray = line.split(",");
                 userList.add(UserDto.builder()
-                        .email(splitArray[0])
+                        .username(splitArray[0])
                         .password(splitArray[1])
                         .build());
                 line = bufferedReader.readLine();
