@@ -67,7 +67,8 @@ public class AddContactsTests extends ApplicationManager {
                 .build();
         System.out.println("contact --> " + contact);
         addPage.fillContactForm(contact)
-                .clickBtnSaveContactPositive();
+                .clickBtnSaveContactPositive()
+                .isLastPhoneEquals(contact.getPhone());
 
         // added : homework 30.10.24
         Request request = new Request.Builder()
