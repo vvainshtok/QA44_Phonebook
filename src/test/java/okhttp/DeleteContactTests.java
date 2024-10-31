@@ -1,6 +1,5 @@
 package okhttp;
 
-import com.google.gson.Gson;
 import dto.ContactDtoLombok;
 import dto.ResponseMessageDto;
 import dto.TokenDto;
@@ -73,7 +72,6 @@ public class DeleteContactTests implements BaseApi {
 
     @Test
     public void deletePositiveTest() {
-
         Request request = new Request.Builder()
                 .url(BASE_URL + GET_ALL_CONTACTS_PATH + "/" + contactId)
                 .addHeader("Authorization", token.getToken())
@@ -86,6 +84,37 @@ public class DeleteContactTests implements BaseApi {
             throw new RuntimeException(e);
         }
         Assert.assertTrue(response.isSuccessful());
+    }
 
+    @Test
+    public void deleteNegativeTest_ExpCode400() {
+        Request request = new Request.Builder()
+                .url(BASE_URL + GET_ALL_CONTACTS_PATH + "/" + "wrongID")
+                .addHeader("Authorization", token.getToken())
+                .delete()
+                .build();
+        Response response;
+        try {
+            response = OK_HTTP_CLIENT.newCall(request).execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Assert.assertEquals(response.code(), 400);
+    }
+
+    @Test
+    public void deleteNegativeTest_ExpCode401_Unauthorized() {
+        Request request = new Request.Builder()
+                .url(BASE_URL + GET_ALL_CONTACTS_PATH + "/" + contactId)
+                .addHeader("Authorization", token.getToken()+"1")
+                .delete()
+                .build();
+        Response response;
+        try {
+            response = OK_HTTP_CLIENT.newCall(request).execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Assert.assertEquals(response.code(), 401);
     }
 }

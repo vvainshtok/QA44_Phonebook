@@ -53,7 +53,6 @@ public class GetAllContactsTests implements BaseApi {
         }
         System.out.println("->>>" + response.toString());
         Assert.assertTrue(response.isSuccessful());
-
     }
 
     @Test
@@ -70,7 +69,6 @@ public class GetAllContactsTests implements BaseApi {
         }
         System.out.println("->>>" + response.toString());
         Assert.assertEquals(response.code(), 403);
-
     }
 
     @Test
@@ -88,7 +86,6 @@ public class GetAllContactsTests implements BaseApi {
         }
         System.out.println("->>>" + response.toString());
         Assert.assertEquals(response.code(), 401);
-
     }
 
 
@@ -111,7 +108,8 @@ public class GetAllContactsTests implements BaseApi {
             for (ContactDtoLombok c : contacts.getContacts())
                 System.out.println(c);
         }
-        else System.out.println("Something went wrong");;
-
+        else {
+            System.out.println("Something went wrong");
+        }
     }
 }

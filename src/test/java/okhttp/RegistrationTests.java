@@ -83,5 +83,30 @@ public class RegistrationTests implements BaseApi {
             softAssert.assertTrue(errorMessage.getMessage().toString().contains("password= "));
             softAssert.assertAll();
         }
+
+    // Homework 31.10.24
+    @Test
+    public void registrationNegativeTest_ExRes409() throws IOException {
+        UserDto user = new UserDto(generateEmail(10),"Qwerty123!");
+        RequestBody requestBody = RequestBody.create(GSON.toJson(user), JSON);
+        Request request = new Request.Builder()
+                .url(BASE_URL+REGISTRATION_PATH)
+                .post(requestBody)
+                .build();
+        Response response;
+        try {
+            OK_HTTP_CLIENT.newCall(request).execute();
+            response = OK_HTTP_CLIENT.newCall(request).execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        ErrorMessageDto errorMessage = GSON.fromJson(response.body().string(), ErrorMessageDto.class);
+        softAssert.assertEquals(response.code(), 409);
+        softAssert.assertEquals(errorMessage.getStatus(), 409);
+        softAssert.assertEquals(errorMessage.getError(), "Conflict");
+        softAssert.assertTrue(errorMessage.getMessage().toString().contains("User already exists"));
+        softAssert.assertAll();
+    }
+
     }
 
