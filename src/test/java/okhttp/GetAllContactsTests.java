@@ -21,7 +21,7 @@ public class GetAllContactsTests implements BaseApi {
 
     TokenDto token;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void loginUser() {
         UserDto user = new UserDto(getProperty("data.properties", "email"),
                 getProperty("data.properties", "password"));
@@ -38,7 +38,7 @@ public class GetAllContactsTests implements BaseApi {
         }
     }
 
-    @Test
+    @Test(groups = {"smoke", "positive"})
     public void getAllContactsPositiveTest() {
         Request request = new Request.Builder()
                 .url(BASE_URL + GET_ALL_CONTACTS_PATH)
@@ -55,7 +55,7 @@ public class GetAllContactsTests implements BaseApi {
         Assert.assertTrue(response.isSuccessful());
     }
 
-    @Test
+    @Test(groups = {"smoke","negative"})
     public void getAllContactsNegativeTest_withoutToken_403() {
         Request request = new Request.Builder()
                 .url(BASE_URL + GET_ALL_CONTACTS_PATH)

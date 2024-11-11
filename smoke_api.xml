@@ -6,14 +6,14 @@
         <groups>
             <run>
                 <include name="smoke"/>
+                <exclude name="negative"/>
             </run>
         </groups>
         <classes>
-            <class name="tests.LoginTests"/>
-            <class name="tests.RegistrationTests"/>
-            <class name="tests.EditContactsTest"/>
-            <class name="tests.DeleteContactsTest"/>
-            <class name="tests.AddContactsTests"/>
+            <class name="okhttp.LoginTests"/>
+            <class name="okhttp.GetAllContactsTests"/>
+            <class name="okhttp.DeleteContactTests"/>
+            <class name="okhttp.UpdateContactTests"/>
         </classes>
     </test>
 </suite>

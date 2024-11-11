@@ -18,7 +18,7 @@ import static utils.RandomUtils.generateEmail;
 public class LoginTests implements BaseApi {
     UserDto user;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void registrationUser() {
         user = new UserDto(generateEmail(10), "Qwerty123!");
         RequestBody requestBody = RequestBody.create(GSON.toJson(user), JSON);
@@ -35,7 +35,7 @@ public class LoginTests implements BaseApi {
         System.out.println("registration response is successful --> " + response.isSuccessful());
     }
 
-    @Test
+    @Test(groups = {"smoke","positive"})
     public void loginPositiveTest() {
         RequestBody requestBody = RequestBody.create(GSON.toJson(user), JSON);
         Request request = new Request.Builder()

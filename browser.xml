@@ -3,6 +3,7 @@
 
 <suite name="smoke" >
     <test name="smoke">
+        <parameter name="browser" value="firefox"/>
         <groups>
             <run>
                 <include name="smoke"/>
@@ -10,10 +11,6 @@
         </groups>
         <classes>
             <class name="tests.LoginTests"/>
-            <class name="tests.RegistrationTests"/>
-            <class name="tests.EditContactsTest"/>
-            <class name="tests.DeleteContactsTest"/>
-            <class name="tests.AddContactsTests"/>
         </classes>
     </test>
 </suite>

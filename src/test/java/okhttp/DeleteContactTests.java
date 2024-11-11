@@ -23,7 +23,7 @@ public class DeleteContactTests implements BaseApi {
     TokenDto token;
     String contactId;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void loginUser() {
         UserDto user = new UserDto(getProperty("data.properties", "email"),
                 getProperty("data.properties", "password"));
@@ -41,7 +41,7 @@ public class DeleteContactTests implements BaseApi {
         }
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void addNewContact() {
         ContactDtoLombok contact = ContactDtoLombok.builder()
                 .name(generateString(5))
@@ -70,7 +70,7 @@ public class DeleteContactTests implements BaseApi {
         }
     }
 
-    @Test
+    @Test(groups = {"smoke", "positive"})
     public void deletePositiveTest() {
         Request request = new Request.Builder()
                 .url(BASE_URL + GET_ALL_CONTACTS_PATH + "/" + contactId)
